@@ -1,0 +1,640 @@
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>OE Treasury</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            font-size: 18px;
+            margin: 0;
+            padding: 0;
+            letter-spacing: 2px;
+            transition: margin-right 0.3s;
+        }
+        .header-container {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 5px solid #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .header-container h1 {
+            font-size: 36px;
+            margin: 0;
+            position: relative;
+            animation: glow 1.5s infinite;
+            color: #dc3545;
+            font-family: 'Times New Roman', Times, serif;
+        }
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #dc3545, 0 0 20px #dc3545, 0 0 25px #dc3545, 0 0 30px #dc3545, 0 0 35px #dc3545;
+            }
+            50% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #dc3545, 0 0 40px #dc3545, 0 0 50px #dc3545, 0 0 60px #dc3545, 0 0 70px #dc3545;
+            }
+            100% {
+                text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #dc3545, 0 0 20px #dc3545, 0 0 25px #dc3545, 0 0 30px #dc3545, 0 0 35px #dc3545;
+            }
+        }
+        .company-name-container {
+            background-color: #343a40;
+            color: #ffcc00;
+            padding: 10px;
+            text-align: center;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .company-name-container h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .container {
+            margin: 20px;
+            margin-right: 220px; /* Initial margin to account for sidebar */
+            transition: margin-right 0.3s;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+        .box {
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+        }
+        .box h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .box .row {
+            margin-bottom: 10px;
+        }
+        .box .row div {
+            padding: 5px;
+        }
+        .box .row div span {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+        }
+        .box .row div span.green {
+            background-color: #28a745;
+            color: #ffffff;
+        }
+        .box .row div span.red {
+            background-color: #dc3545;
+            color: #ffffff;
+        }
+        .box .row div span.blue {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+        .box .row div span.orange {
+            background-color: #fd7e14;
+            color: #ffffff;
+        }
+        .box .row div span.black {
+            background-color: #343a40;
+            color: #ffffff;
+        }
+        .table-container {
+            background-color: #ffffff;
+            color: #343a40;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            display: none;
+        }
+        .table-container table {
+            width: 100%;
+            text-align: center;
+            border-collapse: collapse;
+        }
+        .table-container table th, .table-container table td {
+            border: 1px solid #dee2e6;
+            padding: 10px;
+        }
+        .btn-custom, .btn-danger, .btn-success {
+            background-color: #007bff;
+            color: #ffffff;
+            border: 2px solid #0056b3;
+            padding: 10px 20px;
+            text-align: center;
+            display: block;
+            margin: 10px auto;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border: 2px solid #a71d2a;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border: 2px solid #1e7e34;
+        }
+        .btn-custom:hover, .btn-danger:hover, .btn-success:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+        }
+        .btn-danger:hover {
+            background-color: #a71d2a;
+        }
+        .btn-success:hover {
+            background-color: #1e7e34;
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 200px;
+            height: 100%;
+            background-color: #ffffff;
+            border-left: 1px solid #dee2e6;
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            transition: width 0.3s;
+        }
+        .sidebar.collapsed {
+            width: 50px;
+        }
+        .sidebar .btn-custom {
+            width: 100%;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sidebar .btn-custom i {
+            margin-right: 10px;
+        }
+        .sidebar .toggle-btn {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .stats {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .stats .stat-box {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            color: #ffffff;
+        }
+        .stats .stat-box.green {
+            background-color: #28a745;
+        }
+        .stats .stat-box.red {
+            background-color: #dc3545;
+        }
+        .stats .stat-box.blue {
+            background-color: #007bff;
+        }
+        .stats .stat-box span {
+            display: block;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+                border-left: none;
+                border-top: 1px solid #dee2e6;
+            }
+            .sidebar.collapsed {
+                width: 100%;
+            }
+            .sidebar .btn-custom {
+                margin-bottom: 10px;
+            }
+            .stats {
+                flex-direction: column;
+            }
+            .stats .stat-box {
+                margin: 10px 0;
+            }
+            .container {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <h1>OE Treasury</h1>
+    </div>
+    <div class="company-name-container">
+        <h1 id="company-name">اسم الشركة: <span id="company-name-value"></span></h1>
+    </div>
+    <div class="container" id="main-container">
+        <div class="stats">
+            <div class="stat-box green">
+                <span>اجمالي الرصيد الوارد</span>
+                <span id="total-incoming">0 LE</span>
+            </div>
+            <div class="stat-box red">
+                <span>اجمالي الرصيد الصادر</span>
+                <span id="total-outgoing">0 LE</span>
+            </div>
+            <div class="stat-box blue">
+                <span>اجمالي الرصيد بالخزينة</span>
+                <span id="total-balance">0 LE</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="box">
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="number" id="amount" class="form-control" placeholder="المبلغ">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="text" id="supplier-name" class="form-control" placeholder="اسم المورد">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="text" id="transaction-description" class="form-control" placeholder="وصف العملية">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="date" id="transaction-date" class="form-control" placeholder="التاريخ">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <button class="btn-danger w-100" onclick="addTransaction('outgoing')">صادر</button>
+                        </div>
+                        <div class="col-6">
+                            <button class="btn-success w-100" onclick="addTransaction('incoming')">وارد</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-container" id="transaction-table-container">
+            <button class="btn-custom" onclick="toggleTable()">إغلاق</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>اسم المورد</th>
+                        <th>نوع العملية</th>
+                        <th>المبلغ</th>
+                        <th>الملاحظات</th>
+                        <th>تاريخ العملية</th>
+                    </tr>
+                </thead>
+                <tbody id="transaction-table">
+                    <!-- Transactions will be added here dynamically -->
+                </tbody>
+            </table>
+        </div>
+        <div class="footer">
+            <p>ENG-OMAR ESSAM</p>
+        </div>
+    </div>
+    <div class="sidebar" id="sidebar">
+        <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+        <div style="margin-top: 60px;">
+            <button class="btn-custom" onclick="showAllTransactions()"><i>📊</i> &nbsp; حركة الخزينة</button>
+            <button class="btn-custom" onclick="showIncomingTransactions()"><i>💰</i> &nbsp; مقبوضات</button>
+            <button class="btn-custom" onclick="showOutgoingTransactions()"><i>💸</i> &nbsp; مدفوعات</button>
+            <button class="btn-custom" onclick="printTable()"><i>🖨️</i> &nbsp; طباعة التقارير</button>
+            <button class="btn-custom" onclick="saveData()"><i>💾</i> &nbsp; حفظ البيانات</button>
+            <button class="btn-custom" onclick="toggleSettings()"><i>⚙️</i> &nbsp; الاعدادات</button>
+            <button class="btn-custom" onclick="clearData()"><i>🗑️</i> &nbsp; مسح الخزينة</button>
+        </div>
+    </div>
+    <div class="settings-container" id="settings-container" style="display: none; margin-right: 220px;">
+        <div class="box">
+            <div class="row">
+                <div class="col-12">
+                    <input type="text" id="company-name-input" class="form-control" placeholder="اسم الشركة">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <input type="number" id="initial-balance" class="form-control" placeholder="الرصيد الابتدائي">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <button class="btn-success w-100" onclick="saveSettings()">حفظ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let totalIncoming = 0;
+        let totalOutgoing = 0;
+        let totalBalance = 0;
+        let transactions = [];
+
+        function addTransaction(type) {
+            const amount = parseFloat(document.getElementById('amount').value);
+            const supplierName = document.getElementById('supplier-name').value;
+            const transactionDescription = document.getElementById('transaction-description').value;
+            const transactionDate = document.getElementById('transaction-date').value;
+
+            if (isNaN(amount) || supplierName === '' || transactionDescription === '' || transactionDate === '') {
+                alert('يرجى إدخال جميع البيانات');
+                return;
+            }
+
+            const transaction = {
+                supplierName,
+                type,
+                amount,
+                transactionDescription,
+                transactionDate
+            };
+
+            transactions.push(transaction);
+
+            if (type === 'incoming') {
+                totalIncoming += amount;
+                totalBalance += amount;
+            } else {
+                totalOutgoing += amount;
+                totalBalance -= amount;
+            }
+
+            document.getElementById('total-incoming').innerText = totalIncoming + ' LE';
+            document.getElementById('total-outgoing').innerText = totalOutgoing + ' LE';
+            document.getElementById('total-balance').innerText = totalBalance + ' LE';
+
+            document.getElementById('amount').value = '';
+            document.getElementById('supplier-name').value = '';
+            document.getElementById('transaction-description').value = '';
+            document.getElementById('transaction-date').value = '';
+
+            renderTable();
+        }
+
+        function renderTable(filterType = null) {
+            const transactionTable = document.getElementById('transaction-table');
+            transactionTable.innerHTML = '';
+
+            transactions.forEach(transaction => {
+                if (filterType && transaction.type !== filterType) return;
+
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${transaction.supplierName}</td>
+                    <td>${transaction.type === 'incoming' ? 'رصيد وارد' : 'رصيد صادر'}</td>
+                    <td>${transaction.amount}</td>
+                    <td>${transaction.transactionDescription}</td>
+                    <td>${transaction.transactionDate}</td>
+                `;
+                transactionTable.appendChild(newRow);
+            });
+        }
+
+        function toggleTable() {
+            const tableContainer = document.getElementById('transaction-table-container');
+            tableContainer.style.display = tableContainer.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function showAllTransactions() {
+            renderTable();
+            toggleTable();
+        }
+
+        function showIncomingTransactions() {
+            renderTable('incoming');
+            toggleTable();
+        }
+
+        function showOutgoingTransactions() {
+            renderTable('outgoing');
+            toggleTable();
+        }
+
+	function printTable() {
+	    // Create a new window
+	    const printWindow = window.open('', '_blank', 'width=800,height=600');
+
+	    // Prepare the HTML content for the print window
+	    let printContent = `
+	        <html>
+	        <head>
+	            <title>طباعة التقارير</title>
+	            <style>
+	                body {
+	                    font-family: Arial, sans-serif;
+	                    direction: rtl;
+	                    margin: 0;
+	                    padding: 20px;
+	                }
+	                table {
+	                    width: 100%;
+	                    border-collapse: collapse;
+	                    margin-bottom: 20px;
+	                }
+	                th, td {
+	                    border: 1px solid #dee2e6;
+	                    padding: 10px;
+	                    text-align: center;
+	                }
+	                th {
+	                    background-color: #007bff;
+	                    color: white;
+	                }
+	                @media print {
+	                    @page {
+	                        size: A4;
+	                        margin: 0;
+	                    }
+	                    body {
+	                        margin: 20mm;
+	                    }
+	                }
+	            </style>
+	        </head>
+	        <body>
+	            <h1 style="text-align: center;">حركة الخزينة</h1>
+	            <table>
+	                <thead>
+	                    <tr>
+	                        <th>اسم المورد</th>
+	                        <th>نوع العملية</th>
+	                        <th>المبلغ</th>
+	                        <th>الملاحظات</th>
+	                        <th>تاريخ العملية</th>
+	                    </tr>
+	                </thead>
+	                <tbody>
+	    `;
+
+	    // Add each transaction to the print content
+	    transactions.forEach(transaction => {
+	        printContent += `
+	            <tr>
+	                <td>${transaction.supplierName}</td>
+	                <td>${transaction.type === 'incoming' ? 'رصيد وارد' : 'رصيد صادر'}</td>
+	                <td>${transaction.amount}</td>
+	                <td>${transaction.transactionDescription}</td>
+	                <td>${transaction.transactionDate}</td>
+	            </tr>
+	        `;
+	    });
+
+	    printContent += `
+	                </tbody>
+	            </table>
+	        </body>
+	        </html>
+	    `;
+
+	    // Write the content to the new window
+	    printWindow.document.write(printContent);
+	    printWindow.document.close(); // Close the document to render it
+
+	    // Wait for the content to load and then open the print dialog
+	    printWindow.onload = function() {
+	        printWindow.print();
+	        printWindow.close(); // Close the print window after printing
+	    };
+	}
+
+	function clearData() {
+	    // Clear the transactions array and reset totals
+	    transactions = [];
+	    totalIncoming = 0;
+	    totalOutgoing = 0;
+	    totalBalance = 0;
+
+	    // Update the displayed values
+	    document.getElementById('total-incoming').innerText = '0 LE';
+	    document.getElementById('total-outgoing').innerText = '0 LE';
+	    document.getElementById('total-balance').innerText = '0 LE';
+	    document.getElementById('company-name-value').innerText = '';
+
+	    // Clear localStorage
+	    localStorage.removeItem('companyName');
+	    localStorage.removeItem('transactions');
+
+	    alert('تم مسح جميع البيانات بنجاح!');
+	}
+
+	function saveData() {
+	    const companyName = document.getElementById('company-name-value').innerText;
+	    const transactionsData = JSON.stringify(transactions);
+
+	    localStorage.setItem('companyName', companyName);
+	    localStorage.setItem('transactions', transactionsData);
+
+	    alert('تم حفظ البيانات بنجاح!');
+	}
+
+	window.onload = function() {
+	    const savedCompanyName = localStorage.getItem('companyName');
+	    const savedTransactions = localStorage.getItem('transactions');
+
+	    if (savedCompanyName) {
+	        document.getElementById('company-name-value').innerText = savedCompanyName;
+	    }
+
+	    if (savedTransactions) {
+	        transactions = JSON.parse(savedTransactions);
+	        transactions.forEach(transaction => {
+	            if (transaction.type === 'incoming') {
+	                totalIncoming += transaction.amount;
+	                totalBalance += transaction.amount;
+	            } else {
+	                totalOutgoing += transaction.amount;
+	                totalBalance -= transaction.amount;
+	            }
+	        });
+	        document.getElementById('total-incoming').innerText = totalIncoming + ' LE';
+	        document.getElementById('total-outgoing').innerText = totalOutgoing + ' LE';
+	        document.getElementById('total-balance').innerText = totalBalance + ' LE';
+	        renderTable();
+	    }
+	};
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContainer = document.getElementById('main-container');
+            const settingsContainer = document.getElementById('settings-container');
+            sidebar.classList.toggle('collapsed');
+            if (sidebar.classList.contains('collapsed')) {
+                mainContainer.style.marginRight = '60px';
+                settingsContainer.style.marginRight = '60px';
+            } else {
+                mainContainer.style.marginRight = '220px';
+                settingsContainer.style.marginRight = '220px';
+            }
+        }
+
+        function toggleSettings() {
+            const settingsContainer = document.getElementById('settings-container');
+            settingsContainer.style.display = settingsContainer.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function saveSettings() {
+            const companyName = document.getElementById('company-name-input').value;
+            const initialBalance = parseFloat(document.getElementById('initial-balance').value);
+
+            if (companyName === '' || isNaN(initialBalance)) {
+                alert('يرجى إدخال جميع البيانات');
+                return;
+            }
+
+            document.getElementById('company-name-value').innerText = companyName;
+            totalBalance += initialBalance;
+            document.getElementById('total-balance').innerText = totalBalance + ' LE';
+
+            document.getElementById('company-name-input').value = '';
+            document.getElementById('initial-balance').value = '';
+            toggleSettings();
+        }
+    </script>
+</body>
+</html>
